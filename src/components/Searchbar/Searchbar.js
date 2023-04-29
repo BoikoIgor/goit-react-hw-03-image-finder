@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { CiSearch } from 'react-icons/ci';
 import PropTypes from 'prop-types';
