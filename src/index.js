@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from 'components/App';
 import { ThemeProvider } from 'styled-components';
-import './styles.css';
+// import './styles.css';
 
 const theme = {
   colors: {

@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 
 export const Searchbar = ({ onSubmit }) => {
   const handleSubmit = e => {
-    console.log(e);
     onSubmit(e.searchValue);
   };
 
   return (
-    <section className="Searchbar">
+    <header className="Searchbar">
       <Formik initialValues={{ searchValue: '' }} onSubmit={handleSubmit}>
         <Form className="SearchForm">
           <button type="submit" className="SearchForm-button">
@@ -22,10 +21,12 @@ export const Searchbar = ({ onSubmit }) => {
             className="SearchForm-input"
             type="text"
             placeholder="Search images and photos"
+            autoComplete="off"
+            autoFocus
           />
         </Form>
       </Formik>
-    </section>
+    </header>
   );
 };
 Searchbar.propTypes = {

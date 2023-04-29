@@ -4,21 +4,25 @@ import { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import * as API from 'services/api';
 import ContentLoader from 'react-content-loader';
+import { ImageGallery } from './ImageGallery/ImageGallery';
+import { LoadMoreBtn } from './Button/Button';
 
 export class App extends Component {
   state = {
     gallery: [],
     searchValue: '',
+    page: 1,
     isLoading: false,
   };
   async componentDidUpdate(_, prevState) {
-    const { searchValue } = this.state;
-    if (prevState.searchValue !== searchValue) {
+    const { gallery, searchValue, page } = this.state;
+    if (prevState.searchValue !== searchValue || prevState.page !== page) {
       try {
         this.setState({ isLoading: true });
-        const fetchImages = await API.getImages(searchValue);
-
-        console.log(fetchImages);
+        const fetchImages = await API.getImages(searchValue, page);
+        this.setState(state => ({
+          gallery: [...gallery, ...fetchImages.hits],
+        }));
       } catch (error) {
         console.log(error);
       } finally {
@@ -28,26 +32,30 @@ export class App extends Component {
   }
 
   onSubmit = value => {
-    console.log('value: ', value);
     try {
       if (value === this.state.searchValue) {
         return;
       }
-      this.setState({ searchValue: value });
+      this.setState({ searchValue: value, gallery: [] });
     } catch (err) {}
   };
 
+  LoadMore = () => {
+    this.setState(state => ({ page: state.page + 1 }));
+  };
+
   render() {
+    const { gallery, isLoading } = this.state;
     return (
       <Layout>
         <Searchbar onSubmit={this.onSubmit} />
-        {this.state.isLoading && (
+        {isLoading && (
           <ContentLoader
             viewBox="0 0 400 160"
             height={60}
             width={100}
             backgroundColor="maroon"
-            foregroundColor="blue"
+            foregroundColor="orange"
             style={{ width: '100%', marginTop: '0' }}
             interval={0.1}
           >
@@ -56,6 +64,8 @@ export class App extends Component {
             <circle cx="288" cy="20" r="20" />
           </ContentLoader>
         )}
+        <ImageGallery values={gallery} />
+        {gallery.length !== 0 && <LoadMoreBtn onClick={this.LoadMore} />}
         <GlobalStyle />
       </Layout>
     );
