@@ -1,3 +1,34 @@
-export const Searchbar = () => {
-  return <div>SearchForm</div>;
+import { Component } from 'react';
+import { Formik, Form, Field } from 'formik';
+import { CiSearch } from 'react-icons/ci';
+import PropTypes from 'prop-types';
+
+export const Searchbar = ({ onSubmit }) => {
+  const handleSubmit = e => {
+    console.log(e);
+    onSubmit(e.searchValue);
+  };
+
+  return (
+    <section className="Searchbar">
+      <Formik initialValues={{ searchValue: '' }} onSubmit={handleSubmit}>
+        <Form className="SearchForm">
+          <button type="submit" className="SearchForm-button">
+            <span className="SearchForm-button-label">
+              <CiSearch size="30" />
+            </span>
+          </button>
+          <Field
+            name="searchValue"
+            className="SearchForm-input"
+            type="text"
+            placeholder="Search images and photos"
+          />
+        </Form>
+      </Formik>
+    </section>
+  );
+};
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
