@@ -1,4 +1,5 @@
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 const customStyles = {
   overlay: {
     position: 'fixed',
@@ -46,4 +47,10 @@ export const ModalPhoto = ({ isOpen, onClose, imageURL, alt }) => {
       </div>
     </Modal>
   );
+};
+ModalPhoto.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  imageURL: PropTypes.string,
+  alt: PropTypes.string,
 };
