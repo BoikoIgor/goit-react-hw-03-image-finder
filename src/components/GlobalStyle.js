@@ -92,6 +92,7 @@ ul, ol{
 .SearchForm-input {
   display: inline-block;
   width: 100%;
+  height: 100%;
   font: inherit;
   font-size: 1.25rem;
   border: none;
