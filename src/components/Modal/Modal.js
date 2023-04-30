@@ -32,25 +32,24 @@ const customStyles = {
 };
 Modal.setAppElement('#root');
 
-export const ModalPhoto = ({ isOpen, onClose, imageURL, alt }) => {
+export const ModalPhoto = ({ isModal, onClose, photoURL, alt }) => {
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={isModal}
       onRequestClose={onClose}
       style={customStyles}
       contentLabel="Example Modal"
     >
       <div>
         <div>
-          <img src={imageURL} alt={alt} />
+          <img src={photoURL} alt={alt} />
         </div>
       </div>
     </Modal>
   );
 };
 ModalPhoto.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  imageURL: PropTypes.string,
+  isModal: PropTypes.bool.isRequired,
+  photoURL: PropTypes.string,
   alt: PropTypes.string,
 };

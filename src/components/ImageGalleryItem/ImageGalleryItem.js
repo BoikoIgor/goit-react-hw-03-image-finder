@@ -4,30 +4,34 @@ import PropTypes from 'prop-types';
 
 export class ImageGalleryItem extends Component {
   state = {
-    image: null,
-    alt: '',
+    // image: null,
+    // alt: '',
+    isModal: false,
   };
-  setImage = () => {
-    const { photoURL, alt } = this.props;
-    this.setState({ image: photoURL, alt: alt });
-  };
-  closeModal = () => {
-    this.setState({ image: null, alt: '' });
+  // setImage = () => {
+  //   const { photoURL, alt } = this.props;
+  //   this.setState({ image: photoURL, alt: alt });
+  // };
+  // closeModal = () => {
+  //   this.setState({ image: null, alt: '' });
+  // };
+  toggleModal = () => {
+    this.setState({ isModal: !this.state.isModal });
   };
   render() {
-    const { image, alt } = this.state;
+    const { previewURL, photoURL, alt } = this.props;
     return (
       <li>
         <img
-          src={this.props.previewURL}
+          src={previewURL}
           alt={alt}
           className="ImageGalleryItem"
-          onClick={this.setImage}
+          onClick={this.toggleModal}
         />
         <ModalPhoto
-          isOpen={image !== null}
-          onClose={this.closeModal}
-          imageURL={image}
+          isModal={this.state.isModal}
+          onClose={this.toggleModal}
+          photoURL={photoURL}
           alt={alt}
         />
       </li>
@@ -36,6 +40,6 @@ export class ImageGalleryItem extends Component {
 }
 ImageGalleryItem.propTypes = {
   previewURL: PropTypes.string,
-  photoURL: PropTypes.string,
-  alt: PropTypes.string,
+  photoURL: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
 };
