@@ -20,8 +20,8 @@ ImageGallery.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       webformatURL: PropTypes.string,
-      photoURL: PropTypes.string,
-      alt: PropTypes.string,
+      largeImageURL: PropTypes.string,
+      tags: PropTypes.string,
     }).isRequired
   ).isRequired,
 };

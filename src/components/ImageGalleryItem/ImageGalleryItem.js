@@ -35,8 +35,7 @@ export class ImageGalleryItem extends Component {
   }
 }
 ImageGalleryItem.propTypes = {
-  id: PropTypes.number.isRequired,
-  webformatURL: PropTypes.string,
+  previewURL: PropTypes.string,
   photoURL: PropTypes.string,
   alt: PropTypes.string,
 };
